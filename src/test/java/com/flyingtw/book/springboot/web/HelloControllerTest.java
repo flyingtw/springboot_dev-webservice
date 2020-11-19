@@ -35,12 +35,15 @@ public class HelloControllerTest {
 
     @Test
     public void helloDto가_리턴된다() throws Exception{
+
+        //테스트로 확인하고 싶은 값들
         String name = "hello";
         int amount = 1000;
 
+        // mvc는 테스트 객체 빈을 주입받는다
         mvc.perform(
                 get("/hello/dto")
-                    .param("name",name)
+                    .param("name",name)// name 파라미터로 받고 amount 파라미터로 받아서 바로 위에 설정한 값이랑 비교해보는거
                     .param("amount",String.valueOf(amount)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name",is(name)))
